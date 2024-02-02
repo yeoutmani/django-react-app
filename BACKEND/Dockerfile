@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
 
-COPY crud/ /app/
+COPY . /app/
 
 COPY requirements.txt /app/
 
