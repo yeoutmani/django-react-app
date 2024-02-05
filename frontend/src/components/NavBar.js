@@ -13,6 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
+import LogoutIcon from '@mui/icons-material/Logout';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton } from '@mui/material';
@@ -54,6 +55,14 @@ export default function Navbar(props) {
                 <ListItemText primary={"Create"} />
                 </ListItemButton>
             </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/logout" selected={"/logout" === path}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Logout"} />
+            </ListItemButton>
+          </ListItem>
         </List>      
         </Box>
     </div>

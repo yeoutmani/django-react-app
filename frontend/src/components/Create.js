@@ -6,7 +6,7 @@ import MyTextField from './forms/MyTextFiled'
 import MySelectField from './forms/MySelectField'
 import MyMultiLineField from './forms/MyMultiLine'
 import { useForm } from 'react-hook-form'
-import AxiosInstance from './Axios'
+import axios from "axios";
 import Dayjs from 'dayjs'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,20 +18,30 @@ const Create = () => {
     status: ''
   }
   const { handleSubmit, reset, setValue, control } = useForm({ defaultValues: defaultValues })
-  const submission = (data) => {
+  const submission = async (data) => {
     const StartDate = Dayjs(data.start_date["$d"]).format("YYYY-MM-DD")
     const EndDate = Dayjs(data.end_date["$d"]).format("YYYY-MM-DD")
-    AxiosInstance.post(`project/`, {
-      name: data.name,
-      name: data.name,
-      status: data.status,
-      comments: data.comments,
-      start_date: StartDate,
-      end_date: EndDate,
-    }).then((res) => {
+    try {
+      console.log('axios.defaults.headers', axios.defaults.headers)
+      const { datas } = await axios.post(
+        'http://127.0.0.1:8000/project/', {
+        name: data.name,
+        name: data.name,
+        status: data.status,
+        comments: data.comments,
+        start_date: StartDate,
+        end_date: EndDate,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+      );
+      console.log('data', datas)
       navigate(`/`)
-    })
-    console.log(data)
+    } catch (e) {
+      console.log('not auth', e)
+    }
   }
 
   return (
